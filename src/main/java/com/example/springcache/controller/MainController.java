@@ -23,7 +23,8 @@ public class MainController {
     }
 
     @GetMapping("/all")
-    @CachePut(value = "propertyList")
+//    @CachePut(value = "propertyList")
+    @Cacheable(value = "property",key = "'2'")
     public  List<Property> getList(){
         System.out.println("List");
         if(property==null) return List.of();
@@ -31,7 +32,8 @@ public class MainController {
     }
 
     @DeleteMapping("/{id}")
-    @CacheEvict(value = "property",key = "#id")
+//    @CacheEvict(value = "cache1", key = "#id")
+//    @CacheEvict(value = "cache2", key = "#id")
 //    @CacheEvict(value = "propertyList",key = "'2'")
     public  Property deleteProperty(@PathVariable("id") String id){
         System.out.println("Deleter");
@@ -41,6 +43,7 @@ public class MainController {
     }
 
     @PostMapping
+//    @CacheEvict(value = "property",key = "#id")
     public Property createProperty(){
         System.out.println("Creating");
         property=new Property("test",10.0);
